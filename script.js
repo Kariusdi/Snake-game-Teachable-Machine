@@ -14,9 +14,23 @@
 // ************************************************************************
 // ************************************************************************
 // ************************************************************************
-// Assign Model Link Here ! ⤵️
-const URL = "https://teachablemachine.withgoogle.com/models/t0FeiSVJG/";
-//
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// Assign Model Link Here !
+const URL = "https://teachablemachine.withgoogle.com/models/WE1kerLvG/";
+// 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
+// ************************************************************************
 // ************************************************************************
 // ************************************************************************
 // ************************************************************************
@@ -43,19 +57,21 @@ let timeLeft = 60; // 1 minute
 overlay = document.querySelector(".overlay");
 pauseButton = document.querySelector(".pause-button");
 restartButton = document.querySelector(".restart-button");
+startButton = document.querySelector(".start-button");
 loader = document.querySelector(".loading-overlay");
 
 async function init() {
   try {
     loader.classList.remove("hidden");
+
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
-    model = await tmImage.load(modelURL, metadataURL);
+    model = await tmPose.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
 
     const flip = true;
-    webcam = new tmImage.Webcam(400, 400, flip);
+    webcam = new tmPose.Webcam(400, 400, flip);
     await webcam.setup();
     await webcam.play();
     window.requestAnimationFrame(loop);
@@ -63,6 +79,7 @@ async function init() {
     pauseButton.classList.remove("hidden");
     restartButton.classList.remove("hidden");
     loader.classList.add("hidden");
+    startButton.classList.add("hidden");
 
     document.getElementById("webcam-container").innerHTML = "";
     document.getElementById("webcam-container").appendChild(webcam.canvas);
@@ -134,9 +151,10 @@ async function loop() {
 
 async function predict() {
   try {
-    const prediction = await model.predict(webcam.canvas);
+    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+    const prediction = await model.predict(posenetOutput);
     let maxPrediction = prediction[0];
-    for (let i = 1; i < prediction.length; i++) {
+    for (let i = 0; i < maxPredictions; i++) {
       if (prediction[i].probability > maxPrediction.probability) {
         maxPrediction = prediction[i];
       }
@@ -154,12 +172,16 @@ async function predict() {
 function controlSnake() {
   if (label === "up") {
     snake.setDir(0, -1);
+    console.log("up");
   } else if (label === "right") {
     snake.setDir(1, 0);
+    console.log("right");
   } else if (label === "left") {
     snake.setDir(-1, 0);
+    console.log("left");
   } else if (label === "down") {
     snake.setDir(0, 1);
+    console.log("down");
   }
 }
 
