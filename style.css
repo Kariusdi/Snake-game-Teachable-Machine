@@ -248,3 +248,60 @@ p {
       100% calc(100% + 2px);
   }
 }
+
+.yes-no-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-restart-screen {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 24px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+#game-restart-screen button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+#game-restart-screen button:hover {
+  background-color: #45a049;
+}
+#game-restart-screen button:active {
+  transform: scale(0.98);
+}
+
+#game-restart-screen #no {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f44336;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+#game-restart-screen #no:hover {
+  background-color: #e53935;
+}
+#game-restart-screen #no:active {
+  transform: scale(0.98);
+}

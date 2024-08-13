@@ -50,6 +50,14 @@
       <button onclick="restartGame()">Restart</button>
     </div>
 
+    <div id="game-restart-screen">
+      <p id="game-restart-message">Are you sure to restart?</p>
+      <div class="yes-no-button">
+        <button onclick="startGame()">Yes</button
+        ><button id="no" onclick="cont()">No</button>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script src="./script.js"></script>
