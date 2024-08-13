@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+
+body {
+  font-family: "Press Start 2P", sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: #eee;
+  background-color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#webcam-container {
+  margin: 20px auto;
+  height: 400px;
+  width: 400px;
+  border: 1px solid #363636;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}
+#game-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 100dvh;
+  padding-right: 1rem;
+  padding-left: 5px;
+}
+#info-frame {
+  text-align: center;
+  margin-right: 10px;
+}
+canvas {
+  border: 3px solid #4caf50;
+  background-color: #fff;
+  justify-items: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-left: 10px;
+  /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); */
+}
+#score,
+#time-left {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px 0;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: inherit;
+  margin: 10px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.2s, background-color 0.2s;
+  animation-duration: 5ms;
+}
+button:hover {
+  background-color: #45a049;
+  transform: translateY(2px);
+}
+button:active {
+  transform: scale(0.98);
+}
+.pause-button {
+  background-color: #f44336;
+}
+.pause-button:hover {
+  background-color: #e53935;
+}
+.pause-button:active {
+  transform: scale(0.98);
+}
+.restart-button {
+  background-color: #555;
+}
+.restart-button:hover {
+  background-color: #4f4f4f;
+}
+.restart-button:active {
+  transform: scale(0.98);
+}
+#label-container {
+  font-size: 18px;
+  color: #555;
+  margin: 10px 0;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+}
+.prediction-label {
+  font-size: 16px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  display: inline-block;
+}
+#game-over-screen {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 24px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+#game-over-screen button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+  z-index: 10;
+}
+#game-over-screen button:hover {
+  background-color: #45a049;
+}
+#game-over-screen button:active {
+  transform: scale(0.98);
+}
+
+#game-pause-screen {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 24px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+#game-pause-screen button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+#game-pause-screen button:hover {
+  background-color: #45a049;
+}
+#game-pause-screen button:active {
+  transform: scale(0.98);
+}
+
+p {
+  padding: 5px;
+}
+
+.loading-overlay,
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+
+.loading-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  --c: linear-gradient(#ffffff 0 0);
+  --r1: radial-gradient(farthest-side at bottom, #ffffff 93%, #ffffff);
+  --r2: radial-gradient(farthest-side at top, #ffffff 93%, #ffffff);
+  background: var(--c), var(--r1), var(--r2), var(--c), var(--r1), var(--r2),
+    var(--c), var(--r1), var(--r2);
+  background-repeat: no-repeat;
+  animation: l2 0.8s infinite alternate;
+}
+@keyframes l2 {
+  0%,
+  25% {
+    background-size: 8px 0, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px, 8px 0,
+      8px 4px, 8px 4px;
+    background-position: 0 50%, 0 calc(50% - 2px), 0 calc(50% + 2px), 50% 50%,
+      50% calc(50% - 2px), 50% calc(50% + 2px), 100% 50%, 100% calc(50% - 2px),
+      100% calc(50% + 2px);
+  }
+  50% {
+    background-size: 8px 100%, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px, 8px 0,
+      8px 4px, 8px 4px;
+    background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%,
+      50% calc(50% - 2px), 50% calc(50% + 2px), 100% 50%, 100% calc(50% - 2px),
+      100% calc(50% + 2px);
+  }
+  75% {
+    background-size: 8px 100%, 8px 4px, 8px 4px, 8px 100%, 8px 4px, 8px 4px,
+      8px 0, 8px 4px, 8px 4px;
+    background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%,
+      50% calc(0% - 2px), 50% calc(100% + 2px), 100% 50%, 100% calc(50% - 2px),
+      100% calc(50% + 2px);
+  }
+  95%,
+  100% {
+    background-size: 8px 100%, 8px 4px, 8px 4px, 8px 100%, 8px 4px, 8px 4px,
+      8px 100%, 8px 4px, 8px 4px;
+    background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%,
+      50% calc(0% - 2px), 50% calc(100% + 2px), 100% 50%, 100% calc(0% - 2px),
+      100% calc(100% + 2px);
+  }
+}
+
+.yes-no-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-restart-screen {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 24px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+#game-restart-screen button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+#game-restart-screen button:hover {
+  background-color: #45a049;
+}
+#game-restart-screen button:active {
+  transform: scale(0.98);
+}
+
+#game-restart-screen #no {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f44336;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+#game-restart-screen #no:hover {
+  background-color: #e53935;
+}
+#game-restart-screen #no:active {
+  transform: scale(0.98);
+}
