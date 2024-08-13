@@ -170,16 +170,16 @@ async function predict() {
 }
 
 function controlSnake() {
-  if (label === "up") {
+  if (label.toLowerCase() === "up") {
     snake.setDir(0, -1);
     console.log("up");
-  } else if (label === "right") {
+  } else if (label.toLowerCase() === "right") {
     snake.setDir(1, 0);
     console.log("right");
-  } else if (label === "left") {
+  } else if (label.toLowerCase() === "left") {
     snake.setDir(-1, 0);
     console.log("left");
-  } else if (label === "down") {
+  } else if (label.toLowerCase() === "down") {
     snake.setDir(0, 1);
     console.log("down");
   }
